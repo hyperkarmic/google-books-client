@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import BookList from "../components/BookList";
+import { BASE_URL } from "../constants";
 
 const MyBooks = () => {
   const [savedBooks, setSavedBooks] = useState([]);
@@ -17,7 +18,7 @@ const MyBooks = () => {
       text: "Delete",
       onClick: async ({ target }) => {
         const { _id } = savedBooks[target.id];
-        const URL = `https://immense-wave-64262.herokuapp.com/api/books/${_id}`;
+        const URL = `${BASE_URL}/api/books/${_id}`;
         const { data } = await axios.delete(URL);
         setSavedBooks(data.results);
       },
@@ -28,7 +29,7 @@ const MyBooks = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const URL = "https://immense-wave-64262.herokuapp.com/api/save";
+        const URL = `${BASE_URL}/api/save`;
         setLoading(true);
         setSavedBooks([]);
 

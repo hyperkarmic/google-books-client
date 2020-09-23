@@ -3,6 +3,7 @@ import axios from "axios";
 
 import BookList from "../components/BookList";
 import SearchBar from "../components/SearchBar";
+import { BASE_URL } from "../constants";
 
 const Home = () => {
   const [books, setBooks] = useState();
@@ -18,7 +19,7 @@ const Home = () => {
     {
       text: "Save",
       onClick: async ({ target }) => {
-        const URL = "https://immense-wave-64262.herokuapp.com/api/save";
+        const URL = `${BASE_URL}/api/save`;
         const payload = books[target.id];
         await axios.post(URL, payload);
       },
@@ -30,7 +31,7 @@ const Home = () => {
     try {
       event.preventDefault();
 
-      const URL = "https://immense-wave-64262.herokuapp.com/api/books";
+      const URL = `${BASE_URL}/api/books`;
 
       const payload = {
         searchTerm,
