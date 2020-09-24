@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import Container from "react-bootstrap/esm/Container";
 import { HashRouter } from "react-router-dom";
 
-import Navigation from "./NavBar";
+import Navigation from "./components/Navigation";
+import UserContext from "./context/UserContext";
 import Routes from "./Routes";
-import Header from "./components/Header";
 
 const App = () => {
+  const localUser = localStorage.getItem("bibliography");
+  const parsedLocalUser = JSON.parse(localUser);
+  const [user, setUser] = useState(parsedLocalUser || {});
+
   return (
     <HashRouter>
-      <Navigation />
-      <div className="container my-4">
-        <Header />
-        <Routes />
-      </div>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Container fluid>
+          <Navigation />
+          <Routes />
+        </Container>
+      </UserContext.Provider>
     </HashRouter>
   );
 };
+
 export default App;
