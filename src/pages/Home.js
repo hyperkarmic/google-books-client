@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 
+import UserContext from "../context/UserContext";
 import BookList from "../components/BookList";
 import SearchBar from "../components/SearchBar";
 import { BASE_URL } from "../constants";
 
 const Home = () => {
+  const { user } = useContext(UserContext);
   const [books, setBooks] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,9 @@ const Home = () => {
       onClick: async ({ target }) => {
         const URL = `${BASE_URL}/api/save`;
         const payload = books[target.id];
-        await axios.post(URL, payload);
+        await axios.post(URL, payload, {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
       },
       className: "btn btn-success mx-1",
     },
@@ -40,7 +44,9 @@ const Home = () => {
       setLoading(true);
       setBooks();
 
-      const { data } = await axios.post(URL, payload);
+      const { data } = await axios.post(URL, payload, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
 
       setLoading(false);
       setBooks(data.results);
