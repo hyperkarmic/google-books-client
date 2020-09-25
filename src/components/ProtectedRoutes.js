@@ -11,7 +11,7 @@ const ProtectedRoutes = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <LinkContainer to="/home">
-        <Navbar.Brand>Covid-Tracker</Navbar.Brand>
+        <Navbar.Brand>Biblio-Graphy</Navbar.Brand>
       </LinkContainer>
       <Nav className="mr-auto">
         <LinkContainer to="/home">
