@@ -8,10 +8,14 @@ import { BASE_URL } from "../constants";
 
 const Home = () => {
   const { user } = useContext(UserContext);
+  //user imported from user context
   const [books, setBooks] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  //useState sets up state variables.
+  //remember the argument is the initial state!
 
   const btnControls = [
     {
